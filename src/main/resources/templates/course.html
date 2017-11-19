@@ -55,7 +55,7 @@
         </thead>
         <tbody>
         <tr th:if="${courseList == null || courseList.empty}">
-            <td colspan="3">No Courses!</td>
+            <td colspan="7">No Courses!</td>
         </tr>
         <tr th:each="course : ${courseList}">
             <td th:text="${course.id}">1</td>
@@ -73,6 +73,6 @@
 
         </tbody>
     </table>
-</div>>
+</div>
 </body>
 </html>
