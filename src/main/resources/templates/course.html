@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Course App Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#" th:href="@{/}">iKea</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" th:href="@{/courses/add}">Add course <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/courses/edit}">Edit course</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<body>
+
+<div class="jumbotron">
+    <h4 class="display-3">iKEA Courses List </h4>
+    <p class="lead">
+    </p>
+    <hr class="my-4"/>
+
+    <p class="lead"></p>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>DanishName</td>
+            <td>EnglishName</td>
+            <td>Study Programme</td>
+            <td>ECTS</td>
+            <td>Language</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${courseList == null || courseList.empty}">
+            <td colspan="3">No Courses!</td>
+        </tr>
+        <tr th:each="course : ${courseList}">
+            <td th:text="${course.id}">1</td>
+            <td th:text="${course.danishName}">Danish Name ...</td>
+            <td th:text="${course.englishName}">English Name ...</td>
+            <td th:text="${course.studyProgramme}">Study Programme ...</td>
+            <td th:text="${course.ects}">ECTS ...</td>
+            <td th:text="${course.courseLanguage}">Language ...</td>
+
+
+            <td><a href="view.html" th:href="@{'/course/edit?id=' + ${course.id}}" th:text="EDIT">edit ...</a> <a href="view.html" th:href="@{'/course/delete?id=' + ${course.id}}" th:text="DELETE">delete ...</a></td>
+
+            <!--<td th:text="${#calendars.format(task.dueTo)}">July 11, 2012 2:17:16 PM CDT</td>-->
+        </tr>
+
+        </tbody>
+    </table>
+</div>>
+</body>
+</html>

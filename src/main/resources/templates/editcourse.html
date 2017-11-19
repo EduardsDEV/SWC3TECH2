@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add course</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#" th:href="@{/}">iKea</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" th:href="@{/}">link1<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/}">Link2</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<body>
+<hr class="my-4"/>
+<p>Edit course page</p>
+<p th:text="${course.englishName}"></p>
+<p class="lead">
+<form action="#" th:action="@{/course/saveandget}" th:object="${course}" method="post">
+    <input type="hidden" id="id" name="id" placeholder="id" th:value="${course.id}"/> <br/>
+    <input class="form-control" type="text" id="danishName" name="danishName" placeholder="d name" th:value="${course.danishName}" required="true"/> <br/>
+    <input class="form-control" type="text" id="englishName" name="englishName" placeholder="e name" th:value="${course.englishName}" required="true"/> <br/>
+    <input class="form-control" type="text" id="studyProgramme" name="studyProgramme" placeholder="programme" th:value="${course.studyProgramme}" required="true"/> <br/>
+    <input class="form-control" type="number" id="ects" name="ects" placeholder="ects" th:value="${course.ects}" required="true"/> <br/>
+    <input class="form-control" type="text" id="mandatory" name="mandatory" placeholder="mandatory" th:value="${course.mandatory}" required="true"/> <br/>
+    <input class="form-control" type="text" id="courseLanguage" name="courseLanguage" placeholder="language" th:value="${course.courseLanguage}" required="true"/> <br/>
+    <input class="form-control" type="number" id="minStudents" name="minStudents" placeholder="minimum students" th:value="${course.minStudents}" required="true"/> <br/>
+    <input class="form-control" type="number" id="expStudents" name="expStudents" placeholder="expected students" th:value="${course.expStudents}" required="true"/> <br/>
+    <input class="form-control" type="number" id="maxStudents" name="maxStudents" placeholder="maximum students" th:value="${course.maxStudents}" required="true"/> <br/>
+    <input class="form-control" type="text" id="prerequisites" name="prerequisites" placeholder="prerequisites" th:value="${course.prerequisites}" required="true"/> <br/>
+    <input class="form-control" type="text" id="outcome" name="outcome" placeholder="outcome" th:value="${course.outcome}" required="true"/> <br/>
+    <input class="form-control" type="text" id="content" name="content" placeholder="content" th:value="${course.content}" required="true"/> <br/>
+    <input class="form-control" type="text" id="examForm" name="examForm" placeholder="examForm" th:value="${course.examForm}" required="true"/> <br/>
+    <!--<input class="form-control" type="text" id="teachers" name="teachers" placeholder="course teachers" value="Alex" required="true"/> <br/>-->
+
+    <button type="submit" class="btn btn-dark">Save course</button>
+</form>
+</p>
+</body>
+</html>
