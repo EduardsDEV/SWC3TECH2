@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.models.Course;
 import com.example.demo.models.Teacher;
 import com.example.demo.repositories.CourseRepository;
+import com.example.demo.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,17 +11,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
 public class CourseController {
 
     private final CourseRepository courseRepository;
+    private final TeacherRepository teacherRepository;
 
 
     @Autowired
-    public CourseController(CourseRepository courseRepository) {
+    public CourseController(CourseRepository courseRepository, TeacherRepository teacherRepository) {
         this.courseRepository = courseRepository;
+        this.teacherRepository = teacherRepository;
     }
 
     @PostMapping("/course/saveandget")
@@ -54,11 +60,17 @@ public class CourseController {
             @RequestParam(name = "learningActivities", defaultValue = "NO_LEARNING_ACTIVITIES")
                     String learningActivities,
             @RequestParam(name = "examForm", defaultValue = "NO_EXAM_FORM")
-                    String examForm
+                    String examForm,
+            @RequestParam(name = "teachers", defaultValue = "0")
+                    Long[] teachers
             ) {
 
+        final Iterable<Teacher> teacherIterable = teacherRepository.findAll(Arrays.asList(teachers));
+        final List<Teacher> teacherCollection = new ArrayList<>(teachers.length);
+        teacherIterable.forEach(teacher -> teacherCollection.add(teacher));
+
         Course c = new Course(id, danishName, englishName, studyProgramme, ects, mandatory, courseLanguage, minStudents,
-                expStudents, maxStudents, prerequisites, outcome, content, learningActivities, examForm);
+                expStudents, maxStudents, prerequisites, outcome, content, learningActivities, examForm, teacherCollection);
         courseRepository.save(c);
 
         ModelAndView mv = new ModelAndView("course");

@@ -25,6 +25,9 @@ public class Teacher {
         this.password = password;
     }
 
+    public Teacher() {
+    }
+
     public long getId() {
         return id;
     }

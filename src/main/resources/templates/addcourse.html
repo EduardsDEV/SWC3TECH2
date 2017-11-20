@@ -45,9 +45,9 @@
     </fieldset>
     <input class="form-control" type="number" id="ects" name="ects" placeholder="ects" value="10" required="true"/> <br/>
     <fieldset>
-        <legend>Mandatory?</legend>
-        <input type="radio" name="mandatory" id="ismandatory" value="Mandatory" /><label for="ismandatory">Yes</label><br />
-        <input type="radio" name="mandatory" id="notmandatory" value="Not Mandatory" /><label for="notmandatory">No</label><br />
+        <legend>Mandatory or Elective?</legend>
+        <input type="radio" name="mandatory" id="ismandatory" value="Mandatory" /><label for="ismandatory">Mandatory</label><br />
+        <input type="radio" name="mandatory" id="elective" value="Elective" /><label for="elective">Elective</label><br />
     </fieldset>
     <!--<input class="form-control" type="text" id="mandatory" name="mandatory" placeholder="isMandatory" value="Not mandatory" required="true"/> <br/>-->
     <fieldset>
@@ -62,6 +62,15 @@
     <input class="form-control" type="text" id="outcome" name="outcome" placeholder="outcome" value="learning outcome" required="true"/> <br/>
     <input class="form-control" type="text" id="content" name="content" placeholder="content" value="course content" required="true"/> <br/>
     <input class="form-control" type="text" id="examForm" name="examForm" placeholder="examForm" value="examForm" required="true"/> <br/>
+    <!--<input class="form-control" type="text" id="teachers" name="teachers" placeholder="teachers" value="teachers" required="true"/> <br/>-->
+    <div class="custom-controls-stacked">
+        <label>Teachers</label>
+        <label class="custom-control custom-checkbox" th:unless="!teachersList.empty" th:each="teacher : ${teachersList}">
+            <input type="checkbox" class="custom-control-input" th:id="'teacher'+${teacher.id}" name="teachers" th:value="${teacher.id}"/>
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description" th:text="${teacher.firstName + ' ' + teacher.lastName}"></span>
+        </label>
+    </div>
     <!--<input class="form-control" type="text" id="teachers" name="teachers" placeholder="course teachers" value="Alex" required="true"/> <br/>-->
     <button type="submit" class="btn btn-dark">Save course</button>
     <button type="reset" class="btn btn-dark">Reset</button>

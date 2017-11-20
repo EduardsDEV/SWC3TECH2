@@ -1,10 +1,8 @@
 package com.example.demo.models;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -26,13 +24,14 @@ public class Course {
     private String content;
     private String learningActivities;
     private String examForm;
-    //private List<Teacher> teachers;
+    @ManyToMany
+    private List<Teacher> teachers;
     //private List<Student> students;
 
 
     public Course(long id, String danishName, String englishName, String studyProgramme, int ects, String mandatory,
                   String courseLanguage, int minStudents, int expStudents, int maxStudents, String prerequisites,
-                  String outcome, String content, String learningActivities, String examForm) {
+                  String outcome, String content, String learningActivities, String examForm, List<Teacher> teachers) {
         this.id = id;
         this.danishName = danishName;
         this.englishName = englishName;
@@ -48,6 +47,7 @@ public class Course {
         this.content = content;
         this.learningActivities = learningActivities;
         this.examForm = examForm;
+        this.teachers = teachers;
     }
 
     public Course() {
