@@ -1,10 +1,14 @@
 package com.example.demo.controllers;
 
+import com.example.demo.accounts.Account;
 import com.example.demo.models.Course;
 import com.example.demo.models.Teacher;
+import com.example.demo.repositories.AccountRepository;
 import com.example.demo.repositories.CourseRepository;
 import com.example.demo.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,12 +25,14 @@ public class CourseController {
 
     private final CourseRepository courseRepository;
     private final TeacherRepository teacherRepository;
+    private final AccountRepository accountRepository;
 
 
     @Autowired
-    public CourseController(CourseRepository courseRepository, TeacherRepository teacherRepository) {
+    public CourseController(CourseRepository courseRepository, TeacherRepository teacherRepository, AccountRepository accountRepository) {
         this.courseRepository = courseRepository;
         this.teacherRepository = teacherRepository;
+        this.accountRepository = accountRepository;
     }
 
     @PostMapping("/course/saveandget")
@@ -94,6 +100,7 @@ public class CourseController {
         courseRepository.save(c);
 
 
+
         ModelAndView mv = new ModelAndView("course");
         mv.getModel().put("courseList", courseRepository.findAll());
         mv.getModel().put("course", c);
@@ -102,11 +109,15 @@ public class CourseController {
     }
 
     @GetMapping("/course/edit")
-    public ModelAndView editCourse(
+    public ModelAndView editCourse(Authentication authentication,
             @RequestParam(name = "id", defaultValue = "0")
                     long id) {
-        System.out.println("id = " + id);
+        //System.out.println("id = " + id);
         ModelAndView mv = new ModelAndView("editcourse");
+
+//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//        String username = userDetails.getUsername();
+//        Account ac = accountRepository.findByUsername(username);
 
         Course courseById = courseRepository.getCourseById(id);
         mv.getModel().put("course", courseById);

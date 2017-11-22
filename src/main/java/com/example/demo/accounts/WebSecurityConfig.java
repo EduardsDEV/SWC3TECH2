@@ -22,7 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-                //.antMatchers("/student/**").access("hasRole(\"ROLE_STUDENT\")") //this is to allow only to student role
+                .antMatchers("/student/**").access("hasRole(\"ROLE_STUDENT\") or hasRole(\"ROLE_TEACHER\")") //this is to allow only to student role
+                .antMatchers("/course/**").access("hasRole(\"TEACHER\")") //this is to allow only to student role
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
