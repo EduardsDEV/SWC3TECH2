@@ -14,7 +14,7 @@ public class Course {
     private String englishName;
     private String studyProgramme;
     private int ects;
-    private String mandatory;
+    private boolean mandatory;
     private String courseLanguage;
     private int minStudents;
     private int expStudents;
@@ -29,10 +29,9 @@ public class Course {
     //private List<Student> students;
 
 
-    public Course(long id, String danishName, String englishName, String studyProgramme, int ects, String mandatory,
+    public Course( String danishName, String englishName, String studyProgramme, int ects, boolean mandatory,
                   String courseLanguage, int minStudents, int expStudents, int maxStudents, String prerequisites,
                   String outcome, String content, String learningActivities, String examForm, List<Teacher> teachers) {
-        this.id = id;
         this.danishName = danishName;
         this.englishName = englishName;
         this.studyProgramme = studyProgramme;
@@ -93,11 +92,11 @@ public class Course {
         this.id = id;
     }
 
-    public String getMandatory() {
+    public boolean isMandatory() {
         return mandatory;
     }
 
-    public void setMandatory(String mandatory) {
+    public void setMandatory(boolean mandatory) {
         this.mandatory = mandatory;
     }
 
@@ -173,13 +172,13 @@ public class Course {
         this.examForm = examForm;
     }
 
-//    public List<Teacher> getTeachers() {
-//        return teachers;
-//    }
-//
-//    public void setTeachers(List<Teacher> teachers) {
-//        this.teachers = teachers;
-//    }
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
+    }
 
 
 }

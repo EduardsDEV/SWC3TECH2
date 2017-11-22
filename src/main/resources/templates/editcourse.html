@@ -30,29 +30,74 @@
     </div>
 </nav>
 <body>
-<hr class="my-4"/>
-<p>Edit course page</p>
-<p th:text="${course.englishName}"></p>
-<p class="lead">
-<form action="#" th:action="@{/course/saveandget}" th:object="${course}" method="post">
-    <input type="hidden" id="id" name="id" placeholder="id" th:value="${course.id}"/> <br/>
-    <input class="form-control" type="text" id="danishName" name="danishName" placeholder="d name" th:value="${course.danishName}" required="true"/> <br/>
-    <input class="form-control" type="text" id="englishName" name="englishName" placeholder="e name" th:value="${course.englishName}" required="true"/> <br/>
-    <input class="form-control" type="text" id="studyProgramme" name="studyProgramme" placeholder="programme" th:value="${course.studyProgramme}" required="true"/> <br/>
-    <input class="form-control" type="number" id="ects" name="ects" placeholder="ects" th:value="${course.ects}" required="true"/> <br/>
-    <input class="form-control" type="text" id="mandatory" name="mandatory" placeholder="mandatory" th:value="${course.mandatory}" required="true"/> <br/>
-    <input class="form-control" type="text" id="courseLanguage" name="courseLanguage" placeholder="language" th:value="${course.courseLanguage}" required="true"/> <br/>
-    <input class="form-control" type="number" id="minStudents" name="minStudents" placeholder="minimum students" th:value="${course.minStudents}" required="true"/> <br/>
-    <input class="form-control" type="number" id="expStudents" name="expStudents" placeholder="expected students" th:value="${course.expStudents}" required="true"/> <br/>
-    <input class="form-control" type="number" id="maxStudents" name="maxStudents" placeholder="maximum students" th:value="${course.maxStudents}" required="true"/> <br/>
-    <input class="form-control" type="text" id="prerequisites" name="prerequisites" placeholder="prerequisites" th:value="${course.prerequisites}" required="true"/> <br/>
-    <input class="form-control" type="text" id="outcome" name="outcome" placeholder="outcome" th:value="${course.outcome}" required="true"/> <br/>
-    <input class="form-control" type="text" id="content" name="content" placeholder="content" th:value="${course.content}" required="true"/> <br/>
-    <input class="form-control" type="text" id="examForm" name="examForm" placeholder="examForm" th:value="${course.examForm}" required="true"/> <br/>
-    <!--<input class="form-control" type="text" id="teachers" name="teachers" placeholder="course teachers" value="Alex" required="true"/> <br/>-->
+<div class="container">
+    <hr class="my-4"/>
+    <p>Edit course page</p>
+    <p th:text="${course.englishName}"></p>
+    <p class="lead">
+    <form action="#" th:action="@{/course/saveandget}" th:object="${course}" method="post">
+        <input type="hidden" id="id" name="id" placeholder="id" th:value="${course.id}"/> <br/>
+        <legend>Danish Course name</legend>
+        <input class="form-control" type="text" id="danishName" name="danishName" placeholder="d name"
+               th:value="${course.danishName}" required="true"/> <br/>
+        <legend>English Course name</legend>
+        <input class="form-control" type="text" id="englishName" name="englishName" placeholder="e name"
+               th:value="${course.englishName}" required="true"/> <br/>
 
-    <button type="submit" class="btn btn-dark">Save course</button>
-</form>
-</p>
+        <fieldset>
+            <legend>Study Programme</legend>
+            <input type="checkbox" name="studyProgramme" value="Computer Science"/>Computer Science<br/>
+            <input type="checkbox" name="studyProgramme" value="Web Development"/>Web Development<br/>
+            <input type="checkbox" name="studyProgramme" value="Software development"/>Software development<br/>
+            <input type="checkbox" name="studyProgramme" value="IT-Security"/>IT-Security<br/><br/>
+        </fieldset>
+        <input class="form-control" type="number" id="ects" name="ects" placeholder="ects" th:value="${course.ects}"
+               required="true"/> <br/>
+        <fieldset>
+            <legend>Mandatory or Elective?</legend>
+            <input type="radio" name="mandatory" id="ismandatory" value="true" th:checked="${course.mandatory}"/><label
+                for="ismandatory">Mandatory</label><br/>
+            <input type="radio" name="mandatory" id="elective" value="false" th:checked="!${course.mandatory}"/><label
+                for="elective">Elective</label><br/>
+        </fieldset>
+        <legend>Course Language</legend>
+        <input class="form-control" type="text" id="courseLanguage" name="courseLanguage" placeholder="language"
+               th:value="${course.courseLanguage}" required="true"/> <br/>
+        <legend>Minimum amount of students</legend>
+        <input class="form-control" type="number" id="minStudents" name="minStudents" placeholder="minimum students"
+               th:value="${course.minStudents}" required="true"/> <br/>
+        <legend>Expected amount of students</legend>
+        <input class="form-control" type="number" id="expStudents" name="expStudents" placeholder="expected students"
+               th:value="${course.expStudents}" required="true"/> <br/>
+        <legend>Maximum amount of students</legend>
+        <input class="form-control" type="number" id="maxStudents" name="maxStudents" placeholder="maximum students"
+               th:value="${course.maxStudents}" required="true"/> <br/>
+        <legend>Prerequisites</legend>
+        <input class="form-control" type="text" id="prerequisites" name="prerequisites" placeholder="prerequisites"
+               th:value="${course.prerequisites}" required="true"/> <br/>
+        <legend>Outcome</legend>
+        <input class="form-control" type="text" id="outcome" name="outcome" placeholder="outcome"
+               th:value="${course.outcome}" required="true"/> <br/>
+        <legend>Outcome</legend>
+        <input class="form-control" type="text" id="content" name="content" placeholder="content"
+               th:value="${course.content}" required="true"/> <br/>
+        <legend>Exam From</legend>
+        <input class="form-control" type="text" id="examForm" name="examForm" placeholder="examForm"
+               th:value="${course.examForm}" required="true"/> <br/>
+        <div class="custom-controls-stacked">
+            <legend>Course Teachers</legend>
+            <label class="custom-control custom-checkbox" th:unless="!teachersList.empty"
+                   th:each="teacher : ${teachersList}">
+                <input type="checkbox" class="custom-control-input" th:id="'teacher'+${teacher.id}" name="teachers"
+                       th:value="${teacher.id}"/>
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description" th:text="${teacher.firstName + ' ' + teacher.lastName}"></span>
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-dark">Save course</button>
+    </form>
+    </p>
+</div>
 </body>
 </html>

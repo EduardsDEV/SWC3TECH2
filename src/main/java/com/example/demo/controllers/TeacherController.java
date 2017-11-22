@@ -26,16 +26,9 @@ public class TeacherController {
         return "course";
     }
 
-    @GetMapping("/courses/edit")
-    public String loadEditCoursePage() {
-
-        return "editcourse";
-    }
-
     @GetMapping("/courses/add")
     public ModelAndView loadAddCoursePage() {
         ModelAndView mv = new ModelAndView("addcourse");
-        System.out.println(teacherRepository.findAll());
         mv.getModel().put("teachersList", teacherRepository.findAll());
         return mv;
     }

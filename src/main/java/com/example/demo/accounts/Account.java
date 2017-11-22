@@ -11,27 +11,27 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "accounts")
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "account_type")
-public abstract class Account {
+public class Account {
 
     @Id
     @GeneratedValue()
     @Column(name = "account_id")
     private long accountId;
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "username", unique = true, nullable = false)
     @Email
     private String username;
 
     @Column(name = "password")
     private String password;
 
-    @ManyToMany
-    @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "account_id", referencedColumnName = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    @JsonBackReference
-    private Collection<Role> roles;
+    @Column(name = "enabled")
+    private boolean enabled;
+
+    @OneToOne
+    private Role role;
+
+
 
     public long getAccountId() {
         return accountId;
@@ -57,23 +57,19 @@ public abstract class Account {
         this.password = password;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public boolean hasPrivilege(String privilege) {
-        for(Role r : roles){
-            //if (r.getName().equals(LoginHandler.Role.ADMIN.getName())) {
-            for(Privilege p : r.getPrivileges()){
-                if(p.getName().equals(privilege)){
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

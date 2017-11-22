@@ -12,4 +12,10 @@ public class AdminController {
         return "index";
     }
 
+
+    //for login security part
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }

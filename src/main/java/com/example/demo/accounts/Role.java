@@ -19,21 +19,9 @@ public class Role {
 
     @Column(name = "role_name")
     private String name;
-    @ManyToMany(mappedBy = "roles", targetEntity = Account.class)
-    @JsonBackReference
-    private Collection<Account> accounts;
 
-    @ManyToMany
-    @JoinTable(name = "roles_privileges", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
-    private Collection<Privilege> privileges;
-
-    public Role() {
-        super();
-    }
 
     public Role(final String name) {
-        super();
         this.name = name;
     }
 
@@ -53,19 +41,4 @@ public class Role {
         this.name = name;
     }
 
-    public Collection<Account> getUsers() {
-        return accounts;
-    }
-
-    public void setUsers(Collection<Account> accounts) {
-        this.accounts = accounts;
-    }
-
-    public Collection<Privilege> getPrivileges() {
-        return privileges;
-    }
-
-    public void setPrivileges(Collection<Privilege> privileges) {
-        this.privileges = privileges;
-    }
 }

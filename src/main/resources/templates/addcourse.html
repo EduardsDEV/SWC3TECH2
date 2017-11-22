@@ -35,43 +35,53 @@
 <h4>Fill the info for the new course</h4>
 <p class="lead">
 <form action="#" th:action="@{/course/saveandget}" th:object="${course}" method="post">
+    <legend>Danish Course name</legend>
     <input class="form-control" type="text" id="danishName" name="danishName" placeholder="d name" value="Danish Name" required="true"/> <br/>
+    <legend>English Course name</legend>
     <input class="form-control" type="text" id="englishName" name="englishName" placeholder="e name" value="English Name" required="true"/> <br/>
     <fieldset>
-        <input type="checkbox" name="studyProgramme" value="Computer Science"/>Computer Science<br/>
+        <legend>Study Programme</legend>
+        <input type="checkbox" name="studyProgramme" value="Computer Science" />Computer Science<br/>
         <input type="checkbox" name="studyProgramme" value="Web Development"/>Web Development<br/>
         <input type="checkbox" name="studyProgramme" value="Software development"/>Software development<br/>
-        <input type="checkbox" name="studyProgramme" value="IT-Security"/>IT-Security<br/>
+        <input type="checkbox" name="studyProgramme" value="IT-Security"/>IT-Security<br/><br/>
     </fieldset>
+    <legend>ECTS</legend>
     <input class="form-control" type="number" id="ects" name="ects" placeholder="ects" value="10" required="true"/> <br/>
     <fieldset>
         <legend>Mandatory or Elective?</legend>
-        <input type="radio" name="mandatory" id="ismandatory" value="Mandatory" /><label for="ismandatory">Mandatory</label><br />
-        <input type="radio" name="mandatory" id="elective" value="Elective" /><label for="elective">Elective</label><br />
+        <input type="radio" name="mandatory" id="ismandatory" value="1" /><label for="ismandatory">Mandatory</label><br />
+        <input type="radio" name="mandatory" id="elective" value="0" /><label for="elective">Elective</label><br />
     </fieldset>
     <!--<input class="form-control" type="text" id="mandatory" name="mandatory" placeholder="isMandatory" value="Not mandatory" required="true"/> <br/>-->
     <fieldset>
         <legend>Course Language</legend>
-        <input type="radio" name="courseLanguage" id="englishLanguage" value="English language" /><label for="englishLanguage">English language</label><br />
+        <input type="radio" name="courseLanguage" id="englishLanguage" value="English language"  required="true"/><label for="englishLanguage" >English language</label><br />
         <input type="radio" name="courseLanguage" id="danishLanguage" value="Danish language" /><label for="danishLanguage">Danish language</label><br />
     </fieldset>
+    <legend>Minimum amount of students</legend>
     <input class="form-control" type="number" id="minStudents" name="minStudents" placeholder="minimum students" value="25" required="true"/> <br/>
+    <legend>Expected amount of students</legend>
     <input class="form-control" type="number" id="expStudents" name="expStudents" placeholder="expected students" value="30" required="true"/> <br/>
+    <legend>Maximum amount of students</legend>
     <input class="form-control" type="number" id="maxStudents" name="maxStudents" placeholder="maximum students" value="35" required="true"/> <br/>
+    <legend>Prerequisites</legend>
     <input class="form-control" type="text" id="prerequisites" name="prerequisites" placeholder="prerequisites" value="prerequisites" required="true"/> <br/>
+    <legend>Outcome</legend>
     <input class="form-control" type="text" id="outcome" name="outcome" placeholder="outcome" value="learning outcome" required="true"/> <br/>
+    <legend>Content</legend>
     <input class="form-control" type="text" id="content" name="content" placeholder="content" value="course content" required="true"/> <br/>
+    <legend>Exam Form</legend>
     <input class="form-control" type="text" id="examForm" name="examForm" placeholder="examForm" value="examForm" required="true"/> <br/>
     <!--<input class="form-control" type="text" id="teachers" name="teachers" placeholder="teachers" value="teachers" required="true"/> <br/>-->
     <div class="custom-controls-stacked">
-        <label>Teachers</label>
+        <legend>Course Teachers</legend>
         <label class="custom-control custom-checkbox" th:unless="!teachersList.empty" th:each="teacher : ${teachersList}">
             <input type="checkbox" class="custom-control-input" th:id="'teacher'+${teacher.id}" name="teachers" th:value="${teacher.id}"/>
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description" th:text="${teacher.firstName + ' ' + teacher.lastName}"></span>
         </label>
     </div>
-    <!--<input class="form-control" type="text" id="teachers" name="teachers" placeholder="course teachers" value="Alex" required="true"/> <br/>-->
     <button type="submit" class="btn btn-dark">Save course</button>
     <button type="reset" class="btn btn-dark">Reset</button>
     <input type="button" class="btn btn-dark" value="Go Back" onclick="window.location.href='/course/show'" />

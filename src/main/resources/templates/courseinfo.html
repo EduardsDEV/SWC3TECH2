@@ -22,7 +22,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <!--<li class="nav-item active">-->
-                <!--<a class="nav-link" href="#" th:href="@{/courses/add}">Add course <span class="sr-only">(current)</span></a>-->
+            <!--<a class="nav-link" href="#" th:href="@{/courses/add}">Add course <span class="sr-only">(current)</span></a>-->
             <!--</li>-->
 
         </ul>
@@ -50,20 +50,20 @@
             <td th:text="${course.englishName}">English Name ...</td>
         </tr>
         <tr>
-        <td>Study Programme</td>
-        <td th:text="${course.studyProgramme}">Study Programme ...</td>
+            <td>Study Programme</td>
+            <td th:text="${course.studyProgramme}">Study Programme ...</td>
         </tr>
         <tr>
-        <td>ECTS</td>
-        <td th:text="${course.ects}">ECTS ...</td>
+            <td>ECTS</td>
+            <td th:text="${course.ects}">ECTS ...</td>
         </tr>
         <tr>
             <td>Mandatory?</td>
             <td th:text="${course.mandatory}">Mandatory? ...</td>
         </tr>
         <tr>
-        <td>Language</td>
-        <td th:text="${course.courseLanguage}">Language ...</td>
+            <td>Language</td>
+            <td th:text="${course.courseLanguage}">Language ...</td>
         </tr>
         <tr>
             <td>Minimum Students</td>
@@ -96,6 +96,14 @@
         <tr>
             <td>Exam Form</td>
             <td th:text="${course.examForm}">Exam Form ...</td>
+        </tr>
+        <tr>
+            <td>Course Teachers</td>
+            <td>
+                <div th:each="teacher : ${course.teachers}" th:text="${teacher.firstName + ' ' + teacher.lastName}">
+            Course Teachers ...
+</div>
+</td>
         </tr>
 
     </table>

@@ -41,8 +41,8 @@ public class CourseController {
                     String studyProgramme,
             @RequestParam(name = "ects", defaultValue = "NO_ECTS")
                     int ects,
-            @RequestParam(name = "mandatory", defaultValue = "NOT_MANDATORY")
-                    String mandatory,
+            @RequestParam(name = "mandatory")
+                    boolean mandatory,
             @RequestParam(name = "courseLanguage", defaultValue = "NO_LANGUAGE")
                     String courseLanguage,
             @RequestParam(name = "minStudents", defaultValue = "NOT_STATED")
@@ -63,15 +63,36 @@ public class CourseController {
                     String examForm,
             @RequestParam(name = "teachers", defaultValue = "0")
                     Long[] teachers
-            ) {
+    ) {
 
         final Iterable<Teacher> teacherIterable = teacherRepository.findAll(Arrays.asList(teachers));
         final List<Teacher> teacherCollection = new ArrayList<>(teachers.length);
         teacherIterable.forEach(teacher -> teacherCollection.add(teacher));
+        Course c = courseRepository.getCourseById(id);
+        if (c == null) {
+            c = new Course(danishName, englishName, studyProgramme, ects, mandatory, courseLanguage, minStudents,
+                    expStudents, maxStudents, prerequisites, outcome, content, learningActivities, examForm, teacherCollection);
+        }else {
 
-        Course c = new Course(id, danishName, englishName, studyProgramme, ects, mandatory, courseLanguage, minStudents,
-                expStudents, maxStudents, prerequisites, outcome, content, learningActivities, examForm, teacherCollection);
+            c.setDanishName(danishName);
+            c.setEnglishName(englishName);
+            c.setStudyProgramme(studyProgramme);
+            c.setEcts(ects);
+            c.setMandatory(mandatory);
+            c.setCourseLanguage(courseLanguage);
+            c.setMinStudents(minStudents);
+            c.setExpStudents(expStudents);
+            c.setMaxStudents(maxStudents);
+            c.setPrerequisites(prerequisites);
+            c.setOutcome(outcome);
+            c.setContent(content);
+            c.setLearningActivities(learningActivities);
+            c.setExamForm(examForm);
+            c.setTeachers(teacherCollection);
+        }
+
         courseRepository.save(c);
+
 
         ModelAndView mv = new ModelAndView("course");
         mv.getModel().put("courseList", courseRepository.findAll());
@@ -87,14 +108,17 @@ public class CourseController {
         System.out.println("id = " + id);
         ModelAndView mv = new ModelAndView("editcourse");
 
-        mv.getModel().put("course", courseRepository.getCourseById(id));
+        Course courseById = courseRepository.getCourseById(id);
+        mv.getModel().put("course", courseById);
+        mv.getModel().put("teachersList", teacherRepository.findAll());
 
         return mv;
 
 
     }
+
     @GetMapping("/course/show")
-    public ModelAndView showCourse(){
+    public ModelAndView showCourse() {
         ModelAndView mv = new ModelAndView("course");
         mv.getModel().put("courseList", courseRepository.findAll());
         return mv;
