@@ -1,9 +1,9 @@
 package com.example.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.example.demo.accounts.Account;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * Created by edwar on 11/17/2017.
@@ -15,14 +15,17 @@ public class Student {
     private long id;
     private String firstName;
     private String lastName;
-    private String email;
-    private String password;
+    @OneToOne
+    private Account account;
+    private LocalDateTime requestTime;
 
-    public Student(String firstName, String lastName, String email, String password) {
+    public Student(String firstName, String lastName, Account account) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
-        this.password = password;
+        this.account = account;
+    }
+
+    public Student() {
     }
 
     public long getId() {
@@ -45,21 +48,19 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public String getPassword() {
-        return password;
+    public LocalDateTime getRequestTime() {
+        return requestTime;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRequestTime(LocalDateTime requestTime) {
+        this.requestTime = requestTime;
     }
-
-
 }

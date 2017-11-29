@@ -19,12 +19,10 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#" th:href="@{/}">link1<span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/}">Link2</a>
+                <a href="/login?logout" class="btn btn-warning">LOGOUT</a>
             </li>
+
         </ul>
 
     </div>
@@ -61,9 +59,12 @@
                 for="elective">Elective</label><br/>
         </fieldset>
         <legend>Course Language</legend>
-        <input class="form-control" type="text" id="courseLanguage" name="courseLanguage" placeholder="language"
-               th:value="${course.courseLanguage}" required="true"/> <br/>
-        <legend>Minimum amount of students</legend>
+    <input type="radio" name="courseLanguage" id="englishLanguage" value="englishLanguage" th:checked="${course.courseLanguage}"/><label
+        for="englishLanguage">English Language</label><br/>
+    <input type="radio" name="courseLanguage" id="danishLanguage" value="danishLanguage" th:checked="!${course.courseLanguage}"/><label
+        for="danishLanguage">Danish Language</label><br/>
+
+    <legend>Minimum amount of students</legend>
         <input class="form-control" type="number" id="minStudents" name="minStudents" placeholder="minimum students"
                th:value="${course.minStudents}" required="true"/> <br/>
         <legend>Expected amount of students</legend>

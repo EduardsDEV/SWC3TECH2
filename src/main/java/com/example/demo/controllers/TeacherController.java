@@ -26,7 +26,7 @@ public class TeacherController {
         return "course";
     }
 
-    @GetMapping("/courses/add")
+    @GetMapping("/teacher/courses/add")
     public ModelAndView loadAddCoursePage() {
         ModelAndView mv = new ModelAndView("addcourse");
         mv.getModel().put("teachersList", teacherRepository.findAll());

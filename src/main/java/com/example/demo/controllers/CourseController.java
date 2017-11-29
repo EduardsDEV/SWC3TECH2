@@ -108,7 +108,7 @@ public class CourseController {
         return mv;
     }
 
-    @GetMapping("/course/edit")
+    @GetMapping("/teacher/course/edit")
     public ModelAndView editCourse(Authentication authentication,
             @RequestParam(name = "id", defaultValue = "0")
                     long id) {
@@ -128,14 +128,14 @@ public class CourseController {
 
     }
 
-    @GetMapping("/course/show")
+    @GetMapping("/teacher/course/show")
     public ModelAndView showCourse() {
         ModelAndView mv = new ModelAndView("course");
         mv.getModel().put("courseList", courseRepository.findAll());
         return mv;
     }
 
-    @GetMapping("/course/delete")
+    @GetMapping("/teacher/course/delete")
     public ModelAndView deleteCourse(
             @RequestParam(name = "id", defaultValue = "0")
                     long id) {

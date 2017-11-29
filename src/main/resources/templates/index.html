@@ -20,14 +20,18 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#" th:href="@{/course/show}">Teacher view<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" th:href="@{/teacher/course/show}">Teacher view<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/student/showcourses}">Student view</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/}">Admin view</a>
+                <a class="nav-link" href="#" th:href="@{/admin/showcourses}">Admin view</a>
             </li>
+            <li class="nav-item">
+                <a href="/login?logout" class="btn btn-warning">LOGOUT</a>
+            </li>
+
         </ul>
 
     </div>
