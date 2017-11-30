@@ -4,6 +4,7 @@ import com.example.demo.accounts.Account;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created by edwar on 11/17/2017.
@@ -17,7 +18,6 @@ public class Student {
     private String lastName;
     @OneToOne
     private Account account;
-    private LocalDateTime requestTime;
 
     public Student(String firstName, String lastName, Account account) {
         this.firstName = firstName;
@@ -56,11 +56,4 @@ public class Student {
         this.account = account;
     }
 
-    public LocalDateTime getRequestTime() {
-        return requestTime;
-    }
-
-    public void setRequestTime(LocalDateTime requestTime) {
-        this.requestTime = requestTime;
-    }
 }

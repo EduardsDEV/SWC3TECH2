@@ -28,8 +28,9 @@ public class Course {
     private List<Teacher> teachers;
     @ManyToMany
     private List<Student> assignedStudents;
+
     @ManyToMany
-    private List<Student> requestedStudents;
+    private List<CourseRequest> courseRequests;
 
 
     public Course( String danishName, String englishName, String studyProgramme, int ects, boolean mandatory,
@@ -191,11 +192,12 @@ public class Course {
         this.assignedStudents = assignedStudents;
     }
 
-    public List<Student> getRequestedStudents() {
-        return requestedStudents;
+
+    public List<CourseRequest> getCourseRequests() {
+        return courseRequests;
     }
 
-    public void setRequestedStudents(List<Student> requestedStudents) {
-        this.requestedStudents = requestedStudents;
+    public void setCourseRequests(List<CourseRequest> courseRequests) {
+        this.courseRequests = courseRequests;
     }
 }

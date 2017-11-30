@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title>Course App Homepage</title>
+    <title>Approved Students</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
@@ -22,21 +22,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#" th:href="@{/teacher/courses/add}">Add course <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" th:href="@{/student/showcourses}">Courses <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#" th:href="@{/student/showcourses}">My Requests <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#" th:href="@{/student/showcourses}">Approved <span class="sr-only">(current)</span></a>
+            </li>
+
             <li class="nav-item">
                 <a href="/login?logout" class="btn btn-warning">LOGOUT</a>
             </li>
-
-
         </ul>
-
     </div>
 </nav>
 <body>
 
 <div class="jumbotron">
-    <h4 class="display-3">iKEA Courses List </h4>
+    <h4 class="display-3">Approved Students </h4>
     <p class="lead">
     </p>
     <hr class="my-4"/>
@@ -47,31 +51,19 @@
         <thead>
         <tr>
             <td>ID</td>
-            <td>DanishName</td>
-            <td>EnglishName</td>
-            <td>Study Programme</td>
-            <td>ECTS</td>
-            <td>Language</td>
-            <td>Actions</td>
+            <td>First Name</td>
+            <td>Last Name</td>
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${courseList == null || courseList.empty}">
-            <td colspan="7">No Courses!</td>
+        <tr th:if="${assignedStudents == null || assignedStudents.empty}">
+            <td colspan="7">No Students!</td>
         </tr>
-        <tr th:each="course : ${courseList}">
-            <td th:text="${course.id}">1</td>
-            <td th:text="${course.danishName}">Danish Name ...</td>
-            <td th:text="${course.englishName}">English Name ...</td>
-            <td th:text="${course.studyProgramme}">Study Programme ...</td>
-            <td th:text="${course.ects}">ECTS ...</td>
-            <td th:text="${course.courseLanguage}">Language ...</td>
+        <tr th:each="student : ${assignedStudents}">
+            <td th:text="${student.id}">1</td>
+            <td th:text="${student.firstName}">First Name ...</td>
+            <td th:text="${student.lastName}">Last Name ...</td>
 
-
-            <td><a href="view.html" class="btn btn-warning" th:href="@{'/teacher/course/edit?id=' + ${course.id}}" th:text="EDIT">edit ...</a> <a href="view.html" class="btn btn-danger" th:href="@{'/teacher/course/delete?id=' + ${course.id}}" th:text="DELETE">delete ...</a>
-                <a href="view.html" class="btn btn-success" th:href="@{'/teacher/courses/applied?id=' + ${course.id}}" th:text="APPROVED">approved ...</a></td>
-            <!--<a href="/" class="btn btn-dark">Apply Now</a>-->
-            <!--<td th:text="${#calendars.format(task.dueTo)}">July 11, 2012 2:17:16 PM CDT</td>-->
         </tr>
 
         </tbody>

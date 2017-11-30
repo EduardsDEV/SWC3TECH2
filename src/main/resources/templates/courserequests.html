@@ -41,19 +41,21 @@
         <td>First Name</td>
         <td>Last Name</td>
         <td>Request Time</td>
+        <td>Actions</td>
     </tr>
     </thead>
 
     <tbody>
-    <tr th:if="${course.requestedStudents == null || course.requestedStudents.empty}">
+    <tr th:if="${course.courseRequests == null || course.courseRequests.empty}">
         <td colspan="7">No requests!</td>
     </tr>
     <tr
-            th:each="student : ${course.requestedStudents}" >
+            th:each="request : ${course.courseRequests}" >
 
-        <td th:text="${student.firstName}">FirstName</td>
-        <td th:text="${student.lastName}">LastName</td>
-        <td th:text="${student.requestTime}">RequestTime</td>
+        <td th:text="${request?.student.firstName}">FirstName</td>
+        <td th:text="${request?.student.lastName}">LastName</td>
+        <td th:text="${request?.timestamp}">timestamp</td>
+        <td><a href="view.html" class="btn btn-success" th:href="@{'/admin/approve?courseId=' + ${course.id} + '&amp;courseRequestId=' +  ${request.id}}" th:text="APPROVE">Approve ...</a></td>
 
     </tr>
     </tbody>

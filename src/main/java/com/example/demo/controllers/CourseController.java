@@ -109,16 +109,10 @@ public class CourseController {
     }
 
     @GetMapping("/teacher/course/edit")
-    public ModelAndView editCourse(Authentication authentication,
+    public ModelAndView editCourse(
             @RequestParam(name = "id", defaultValue = "0")
                     long id) {
-        //System.out.println("id = " + id);
         ModelAndView mv = new ModelAndView("editcourse");
-
-//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//        String username = userDetails.getUsername();
-//        Account ac = accountRepository.findByUsername(username);
-
         Course courseById = courseRepository.getCourseById(id);
         mv.getModel().put("course", courseById);
         mv.getModel().put("teachersList", teacherRepository.findAll());
@@ -142,7 +136,9 @@ public class CourseController {
         System.out.println("id = " + id);
         Course c = courseRepository.getCourseById(id);
         courseRepository.delete(c);
+        if (c == null){
 
+        }
         ModelAndView mv = new ModelAndView("course");
 
         mv.getModel().put("courseList", courseRepository.findAll());
