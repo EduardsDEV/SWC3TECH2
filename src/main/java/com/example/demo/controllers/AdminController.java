@@ -86,7 +86,7 @@ public class AdminController {
         courseRequestRepository.delete(courseRequestId);
         courseRepository.save(c);
 
-        return new ModelAndView(new RedirectView("/admin/course/requests?id=" + courseId));
+        return new ModelAndView(new RedirectView("/admin/course/requests?id=" + courseId, true));
 
 
     }

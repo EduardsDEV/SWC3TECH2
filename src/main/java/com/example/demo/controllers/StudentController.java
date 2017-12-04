@@ -84,7 +84,7 @@ public class StudentController {
         courseRepository.save(c);
 
 
-        return new ModelAndView(new RedirectView("/student/showcourses"));
+        return new ModelAndView(new RedirectView("/student/showcourses", true));
     }
 
 }

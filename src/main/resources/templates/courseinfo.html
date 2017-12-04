@@ -29,7 +29,7 @@
 
     </div>
     <li class="nav-item">
-        <a href="/login?logout" class="btn btn-warning">LOGOUT</a>
+        <a href="#" th:href="@{/login?logout}" class="btn btn-warning">LOGOUT</a>
     </li>
 
 </nav>
@@ -112,7 +112,7 @@
 
     </table>
     <!--<input type="button" class="btn btn-dark" value="Go Back" onclick="window.location.href='/student/showcourses'" />-->
-    <a href="/student/showcourses" class="btn btn-warning">Go Back</a>
+    <a href="#" th:href="@{/student/showcourses}" class="btn btn-warning">Go Back</a>
     <a href="view.html" class="btn btn-success" th:href="@{'/student/apply?id=' + ${course.id}}">Apply Now</a>
 </div>
 </body>

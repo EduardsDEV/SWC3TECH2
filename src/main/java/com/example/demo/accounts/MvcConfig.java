@@ -10,14 +10,27 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  */
 @Configuration
 public class MvcConfig {
-    @Primary
+//    @Primary
+//    @Bean(name = "dataSource")
+//    public DriverManagerDataSource dataSource() {
+//        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+//        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/ikea");
+//        driverManagerDataSource.setUsername("root");
+//        driverManagerDataSource.setPassword("");
+//        return driverManagerDataSource;
+//    }
+
+        @Primary
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/ikea");
-        driverManagerDataSource.setUsername("root");
-        driverManagerDataSource.setPassword("");
+        driverManagerDataSource.setUrl("jdbc:mysql://ikeadb.cx5gjcsbwv9m.us-west-2.rds.amazonaws.com:3306/iKEA");
+        driverManagerDataSource.setUsername("adminikea");
+        driverManagerDataSource.setPassword("adminikea");
         return driverManagerDataSource;
     }
+
+
 }
