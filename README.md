@@ -18,7 +18,7 @@ Security part was done with Spring Security, using WebSecurityConfig class. At t
 
 	*   Launched EC2 instance with IAM role which has an AmazoneRDSFullAccess policy attached to it. 
 	This was done so that the application running on the EC2 would have access to the RDS. 
-	also added a security group and in Inbound section allowed ports 8080(to access tomcat), 
+	In Security Group allowed traffic for Inbound ports 8080(to access tomcat), 
 	22(to ssh in CLI into ec2). We are using the SSH protocol to log in to the ec2 via an encrypted connection.
 	*   Launched a publicly accessible RDS using MySQL engine to save the project database there,
 	in the same VPC, and attached a security group (Inbound: 22; 3306(mysql), Outbound: All) to control the traffic.
