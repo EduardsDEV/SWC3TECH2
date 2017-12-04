@@ -16,7 +16,8 @@ Security part was done with Spring Security, using WebSecurityConfig class. At t
   In order to be in the range of AWS free-tier we did not create an internet gateway, and are using only one EC2 instance.
 
 
-	*   Launched EC2 instance with IAM role which has an AmazoneRDSFullAccess policy attached to it. This was done so that the 		application running on the EC2 would have access to the RDS. 
+	*   Launched EC2 instance with IAM role which has an AmazoneRDSFullAccess policy attached to it. 
+	This was done so that the application running on the EC2 would have access to the RDS. 
 	also added a security group and in Inbound section allowed ports 8080(to access tomcat), 
 	22(to ssh in CLI into ec2). We are using the SSH protocol to log in to the ec2 via an encrypted connection.
 	*   Launched a publicly accessible RDS using MySQL engine to save the project database there,
